@@ -1,13 +1,41 @@
 let Input= document.querySelector("input")
 let Button= document.querySelector("button")
 let Taskdiv = document.querySelector("#taskdiv")
-let arr=[];
+let arr=[]
+let arr2=[]
 let count =0
+let ChangedobjectTask =null;
+let EDitingPara = null;
+let flag = false
 
-Button.addEventListener('click',function(){
-  
+Button.addEventListener('click',function(e){
+if(Input.value===""){
+  alert("Please Enter the task !")
+}
+else{
+
+
+
+if(EDitingPara){
+  EDitingPara.innerHTML = Input.value
+
+  arr = arr.map((taski)=>{  
+    if(taski.task === ChangedobjectTask){
+        taski.task=Input.value
+      }
+      return taski
+     })
+
+     console.log(arr);
+Input.value=""
+flag= true
+EDitingPara=null
+
+}
+else{
   ToDoList()
-
+}
+}
 })
 
 
@@ -34,6 +62,7 @@ function ToDoList(){
   task:para.innerHTML
 }
   arr.push(obj)
+
   
   Taskdiv.append(divi)
 
@@ -41,39 +70,50 @@ function ToDoList(){
   
   Editbtn.addEventListener('click',function(){
 
-          Edit(obj.id,para,divi)
-
+          Edit(obj.task,para)
   })
 
 
   Delatebtn.addEventListener('click',function(){
 
-          DeleteTask(obj.id,para,divi);
+          DeleteTask(obj.id,divi);
 })
-
-
 }
 
 
 
-function DeleteTask(id,para,divi){
+function DeleteTask(id,divi){
   arr = arr.filter((task)=> task.id !== id)
+// console.log(arr);
 
   divi.remove()
-  
-  
 }
 
-function Edit(id,para,divi){
+
+
+
+function Edit(task,para){
   
-   Input.value = para.innerHTML
+  
+  Input.value = para.innerHTML
+ 
+  ChangedobjectTask= task
+    flag=true
+    EDitingPara = para
 
-   Button.addEventListener('click',function(){
+        
+         
+// Input.value=""
+      
+     
 
-   para.innerHTML=divi.replaceWith(Input.value)
 
-   
-   })
+
+
+        // })
+
+
+
 
 }
 
