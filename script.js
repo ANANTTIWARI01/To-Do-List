@@ -8,13 +8,14 @@ let ChangedobjectTask =null;
 let EDitingPara = null;
 let flag = false
 
+
+
 Button.addEventListener('click',function(e){
 if(Input.value===""){
   alert("Please Enter the task !")
 }
+
 else{
-
-
 
 if(EDitingPara){
   EDitingPara.innerHTML = Input.value
@@ -32,6 +33,7 @@ flag= true
 EDitingPara=null
 
 }
+
 else{
   ToDoList()
 }
@@ -42,7 +44,6 @@ else{
 
 function ToDoList(){
 
-  ++count
   let para= document.createElement("p")
   para.innerHTML=Input.value  
   Taskdiv.append(para)
@@ -58,7 +59,7 @@ function ToDoList(){
   ////////////////
   ///////////////////
   let obj={
-  id:count,
+  id:++count,
   task:para.innerHTML
 }
   arr.push(obj)
@@ -67,7 +68,7 @@ function ToDoList(){
   Taskdiv.append(divi)
 
   Input.value=""
-  
+  ////////////////////////////////////////
   Editbtn.addEventListener('click',function(){
 
           Edit(obj.task,para)
@@ -80,41 +81,26 @@ function ToDoList(){
 })
 }
 
+///////////////////////////////
 
-
-function DeleteTask(id,divi){
+function DeleteTask(id,secondarydiv){
   arr = arr.filter((task)=> task.id !== id)
 // console.log(arr);
 
-  divi.remove()
+secondarydiv.remove()
 }
 
 
-
+/////////////////////////
 
 function Edit(task,para){
-  
-  
   Input.value = para.innerHTML
- 
+
   ChangedobjectTask= task
+
     flag=true
+    
     EDitingPara = para
-
-        
-         
-// Input.value=""
-      
-     
-
-
-
-
-        // })
-
-
-
-
 }
 
 
